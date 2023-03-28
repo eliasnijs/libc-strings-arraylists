@@ -2,7 +2,7 @@
 //// NOTE(Elias): String
 
 /* NOTE(Elias): returns a string from a string literal and it's size */
-internal void 
+internal void
 str_init(char *str, S32 l, Mem_Arena *a, String *s)
 {
   s->l = l;
@@ -25,21 +25,21 @@ str_getchars(String *string)
 }
 
 /* NOTE(Elias): returns the length of a string */
-internal inline S32 
+internal inline S32
 str_getlen(String *string)
 {
   return string->l;
 }
 
 /* NOTE(Elias): compare 2 strings */
-internal inline S32 
+internal inline S32
 str_cmp(String *s1, String *s2)
 {
   return memcmp(s1->str, s2->str, s1->l);
 }
 
 /* NOTE(Elias): slice a string from i1 until i2 */
-internal void 
+internal void
 str_slice(String *s_orig, S32 i1, S32 i2, Mem_Arena *a, String *s_dest)
 {
   Assert(i1 >= 0 && i1 < (s_orig->l - 1));
@@ -55,7 +55,7 @@ str_slice(String *s_orig, S32 i1, S32 i2, Mem_Arena *a, String *s_dest)
 }
 
 /* NOTE(Elias): combine strings: append, prepend, insert, ... */
-internal void 
+internal void
 str_append(String *s1, String *s2, Mem_Arena *a, String *s_dest)
 {
   s_dest->l = s1->l + s2->l - 1;

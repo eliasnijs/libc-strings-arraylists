@@ -1,17 +1,17 @@
 //////////////////////////////////////////////////////////////////////////////////////
 //// ArrayList
 
-internal void 
+internal void
 al_init(S32 bpe, ArrayList *al)
 {
   al->bpe = bpe;
   al->l = 0;
   al->s = 8;
-  al->a = (U8 *)calloc(al->s*al->bpe, 1);
+  al->a = (U8 *)calloc(al->s*al->bpe, 4);
 }
 
 /* destroys an arraylist */
-internal void 
+internal void
 al_die(ArrayList *al)
 {
   free(al->a);
@@ -33,21 +33,21 @@ al_getlen(ArrayList *al)
 }
 
 /* set the element at position i */
-internal void 
+internal void
 al_set(ArrayList *al, void *a_i, S32 i)
-{ 
+{
   Assert(a_i != 0);
   Assert(0 <= i && i < al->l);
-  
+
   memcpy(&al->a[i*al->bpe], a_i, al->bpe);
 }
 
 /* add element at the end */
-internal void 
+internal void
 al_add(ArrayList *al, void *a_n)
 {
   Assert(a_n != 0);
-  
+
   if (al->l >= al->s)
   {
     al->s = 2*al->s;
@@ -58,12 +58,12 @@ al_add(ArrayList *al, void *a_n)
 }
 
 /* add element at position i */
-internal void 
+internal void
 al_insert(ArrayList *al, void *a_i, S32 i)
 {
   Assert(a_i != 0);
   Assert(0 <= i && i <= al->l);
-  
+
   if (al->l >= al->s)
   {
     al->s = 2*al->s;
@@ -75,11 +75,10 @@ al_insert(ArrayList *al, void *a_i, S32 i)
 }
 
 /* remove element at position i */
-internal void 
+internal void
 al_remove(ArrayList *al, S32 i)
 {
   Assert(i < al->l);
-
   memmove(&al->a[i*al->bpe], &al->a[(i+1)*al->bpe], (al->l - i - 1)*al->bpe);
   --al->l;
   if (al->l <= (al->s/2 - REMOVE_SHIFT) && al->s > 8)
@@ -88,3 +87,4 @@ al_remove(ArrayList *al, S32 i)
     al->a = (U8 *)realloc(al->a, al->bpe*al->s);
   }
 }
+

@@ -10,22 +10,22 @@
 
 #include "cbase/cbase.h"
 
-#include "s32arraylist.c"
 #include "arraylist.h"
 #include "arraylist.c"
 
 #include "string.h"
 #include "string.c"
 
-#include "benchmark.c"
-
 #include "tests.c"
+
+#include "cbase/newfile.c"
 
 S32
 main()
 {
   Tu_RunMultiple(test_arenas);
   Tu_RunMultiple(test_strings);
+  Tu_RunMultiple(test_arraylists);
   return 0;
 }
 
